@@ -1,3 +1,6 @@
+import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
@@ -12,15 +15,32 @@ def driver():
     yield driver
     driver.quit()
 
+def test_login_positive(driver):
+    driver.get("https://the-internet.herokuapp.com/login")
+    time.sleep(2)
+
+    driver.find_element(By.ID, "username").send_keys("tomsmith")
+    driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
+    driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+    time.sleep(2)
+
+    success_message = WebDriverWait(driver, 5).until(
+        EC.visibility_of_element_located((By.ID, "flash"))
+    ).text
+
+    assert "You logged into a secure area!" in success_message
+
 def test_login_negative(driver):
     driver.get("https://the-internet.herokuapp.com/login")
+    time.sleep(2)
 
     driver.find_element(By.ID, "username").send_keys("tomsmith")
     driver.find_element(By.ID, "password").send_keys("WrongPassword!")
     driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+    time.sleep(2)
 
-    import time  # add this at the TOP once
+    success_message = WebDriverWait(driver, 5).until(
+        EC.visibility_of_element_located((By.ID, "flash"))
+    ).text
 
-    time.sleep(1)
-    error_message = driver.find_element(By.ID, "flash").text
-    assert "Your password is invalid!" in error_message
+    assert "Your password is invalid!" in success_message

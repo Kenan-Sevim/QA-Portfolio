@@ -1,11 +1,32 @@
-# Selenium Automation Scripts
+# Selenium Automation Tests (Python)
 
-## login_test.py
-- Opens Google homepage
-- Prints the page title
-- Requires: Python, Selenium, ChromeDriver
+This project contains basic Selenium automation tests written in Python using Pytest.
 
-## form_test.py
-- Fills a sample HTML form on W3Schools
-- Submits the form
-- Requires: Python, Selenium, ChromeDriver
+## Tech Stack
+- Python
+- Selenium WebDriver
+- Pytest
+- ChromeDriver
+- PyCharm
+
+## Tests Included
+
+### Login Tests
+File: `test_login.py`
+
+- Positive login test (valid username & password)
+- Negative login test (invalid password)
+- Uses `WebDriverWait` for reliable element handling
+- Demonstrates basic Selenium + Pytest structure
+
+## Test Website
+https://the-internet.herokuapp.com/login
+
+1. Install dependencies:
+```bash
+pip install selenium pytest
+```
+2. Run tests:
+```bash
+pytest
+```

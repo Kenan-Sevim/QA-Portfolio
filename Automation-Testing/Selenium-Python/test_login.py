@@ -39,8 +39,8 @@ def test_login_negative(driver):
     driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
     time.sleep(2)
 
-    success_message = WebDriverWait(driver, 5).until(
+    error_message = WebDriverWait(driver, 5).until(
         EC.visibility_of_element_located((By.ID, "flash"))
     ).text
 
-    assert "Your password is invalid!" in success_message
+    assert "Your password is invalid!" in error_message

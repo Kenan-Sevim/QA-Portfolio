@@ -22,6 +22,7 @@ File: `test_login.py`
 ## Test Website
 https://the-internet.herokuapp.com/login
 
+## How to Run Tests
 1. Install dependencies:
 ```bash
 pip install selenium pytest
